@@ -5,7 +5,7 @@ from datetime import datetime
 import streamlit as st
 
 # Load Firebase credentials from Streamlit secrets
-cred_json = st.secrets["firebase-credentials"]
+cred_json = dict(st.secrets["firebase-credentials"])
 
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
@@ -14,6 +14,7 @@ if not firebase_admin._apps:
 
 # Firestore client
 db = firestore.client()
+
 
 def store_result(edited):
     # Get the current date and time
