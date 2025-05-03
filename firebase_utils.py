@@ -3,8 +3,13 @@ from firebase_admin import credentials, firestore
 import os
 from datetime import datetime
 
-# Use full path or relative path to your JSON file
-cred_path = os.path.join(os.getcwd(), "firebase-credentials.json")
+# Check if running on Streamlit Cloud or locally
+if "GOOGLE_APPLICATION_CREDENTIALS" in os.environ:
+    # When deployed on Streamlit Cloud (or any environment with the correct environment variable)
+    cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+else:
+    # When running locally, use the local path to the firebase credentials file
+    cred_path = os.path.join(os.getcwd(), "firebase-credentials.json")
 
 if not firebase_admin._apps:
     cred = credentials.Certificate(cred_path)
