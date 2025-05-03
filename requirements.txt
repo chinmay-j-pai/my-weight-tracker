@@ -1,6 +1,6 @@
 streamlit
-opencv-python
-easyocr
+opencv-python-headless
 numpy
+easyocr
 firebase-admin
 Pillow
