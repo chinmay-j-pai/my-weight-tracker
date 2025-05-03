@@ -13,11 +13,15 @@ if not firebase_admin._apps:
 db = firestore.client()
 
 def store_result(edited):
-    # Get the current date and time
-    current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
-    # Add data to Firestore
-    doc_ref = db.collection("weights").add({
-        "weight": edited,
-        "date": current_date
-    })
+    try:
+        # Get the current date and time
+        current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        # Add data to Firestore
+        doc_ref = db.collection("weights").add({
+            "weight": edited,
+            "date": current_date
+        })
+        print(f"Document successfully added with ID: {doc_ref.id}")
+    except Exception as e:
+        print("Error adding document to Firestore:", e)
